@@ -33,10 +33,3 @@ git clone <repository-url> TinyCompression
 
 I recommend git, because you can update to the latest version with `git pull` in the project folder.
 
-With `arduino-cli`, either place the library in your sketchbook's `libraries` folder or pass its location with `--library <path>` when compiling. Tested boards are listed in [Codecs](docs/Codecs.md#arduino-platforms).
-
-Then include it in a sketch:
-
-```cpp
-#include <TinyCompression.h>
-```
