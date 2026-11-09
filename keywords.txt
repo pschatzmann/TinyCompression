@@ -1,0 +1,15 @@
+TinyCompression	KEYWORD0
+Codec	KEYWORD1
+RleCodec	KEYWORD1
+DeltaCodec	KEYWORD1
+LzssCodec	KEYWORD1
+HeatshrinkCodec	KEYWORD1
+Lz4Codec	KEYWORD1
+CompressionWriter	KEYWORD1
+CompressionReader	KEYWORD1
+encode	KEYWORD2
+decode	KEYWORD2
+bytesIn	KEYWORD2
+bytesOut	KEYWORD2
+ok	KEYWORD2
+error	KEYWORD2
