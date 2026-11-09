@@ -20,7 +20,7 @@ Detailed documentation is in the [docs](docs/) folder:
 - [API](docs/API.md): classes, constructors and usage examples
 - [Codecs](docs/Codecs.md): the available algorithms, their parameters and trade-offs
 - [Format](docs/Format.md): the on-wire frame format
-- [Testing](docs/Testing.md): desktop build and automated tests
+- [Desktop](docs/Desktop.md): desktop build, examples and automated tests
 
 ## Installation in Arduino
 

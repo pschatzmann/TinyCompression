@@ -46,7 +46,7 @@ The standard LZ4 block format (without the frame wrapper), so blocks produced by
 - **Standard formats:** `Lz4Codec` uses the LZ4 block format. Its blocks from the reference `lz4` CLI v1.9.4 decode correctly (six inputs, two levels each). `HeatshrinkCodec` decodes output from the reference heatshrink library (via the `heatshrink2` package) for five window/lookahead settings.
 - **Library-specific formats:** `RleCodec`, `DeltaCodec` and `LzssCodec` have no standard external format or tool here, so they are checked only by round-trip and known-vector tests and interoperate only with this library.
 - **Frames:** the 5-byte frame header is TinyCompression-specific; see [Format](Format.md). The codec id in each frame lets the reader reject a stream written with a different codec. It does not record Heatshrink's window and lookahead sizes, so both sides must agree on them.
-- **Regenerating the fixtures:** see [Testing](Testing.md).
+- **Regenerating the fixtures:** see [Desktop](Desktop.md#external-fixtures).
 
 ## Language and build
 
@@ -70,6 +70,12 @@ Sketch used for the checks: all five codecs in one sketch, plus the `examples/Ro
 | Other cores (SAMD, nRF52, STM32, Teensy, ...) | Not tested. |
 
 Known platform difference: on the AVR core, `Stream::readBytes` is not virtual, so calling `readBytes` through a `Stream&` reference uses the core's implementation rather than `CompressionReader`'s.
+
+To compile the example for a board:
+
+```bash
+arduino-cli compile --library . --fqbn arduino:avr:uno examples/RoundTrip
+```
 
 ## Open items
 
