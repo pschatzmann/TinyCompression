@@ -18,6 +18,15 @@ cd build && ctest --output-on-failure
 
 To disable the tests, pass `-DTC_BUILD_TESTS=OFF`.
 
+## Using the library on the desktop
+
+The library builds on the desktop without the Arduino core. When `ARDUINO` is not defined, or when `TC_DESKTOP` is defined (the CMake interface target sets it for every consumer), `Platform.h` uses the stand-ins in `src/tinycompression/desktop/`:
+
+- `Print.h` and `Stream.h`: the `Print` and `Stream` subset that the library uses, plus the common `print`/`println` overloads.
+- `Arduino.h`: `Serial` (writes to stdout) and `millis()`, so Arduino sketches can run on the desktop.
+
+`examples/desktop/main.cpp` includes the `RoundTrip` sketch unchanged and calls `setup()` and `loop()`. CMake builds it as `tinycompression_roundtrip` and checks its output with CTest. To use the library in a plain C++ program, add `src` to the include path and do not define `ARDUINO`.
+
 ## Sanitizers
 
 ```bash

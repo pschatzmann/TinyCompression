@@ -6,11 +6,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(TC_BUILD_TESTS "Build the desktop test suite" ON)
+option(TC_BUILD_EXAMPLES "Build the RoundTrip Arduino sketch as a desktop program" ON)
 option(TC_SANITIZE "Build tests with AddressSanitizer and UndefinedBehaviorSanitizer" OFF)
 
 # Header-only interface target: consumers only need the include directory.
+# TC_DESKTOP selects the desktop Print/Stream headers (src/tinycompression/desktop/).
 add_library(TinyCompression INTERFACE)
 target_include_directories(TinyCompression INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_compile_definitions(TinyCompression INTERFACE TC_DESKTOP=1)
+
+if(TC_BUILD_EXAMPLES)
+  enable_testing()
+  add_executable(tinycompression_roundtrip examples/desktop/main.cpp)
+  target_link_libraries(tinycompression_roundtrip PRIVATE TinyCompression)
+  target_compile_options(tinycompression_roundtrip PRIVATE -Wall -Wextra -Wpedantic)
+  add_test(NAME roundtrip_example COMMAND tinycompression_roundtrip)
+  set_tests_properties(roundtrip_example PROPERTIES PASS_REGULAR_EXPRESSION "\nOK\n" FAIL_REGULAR_EXPRESSION "ERROR")
+endif()
 
 if(TC_BUILD_TESTS)
   enable_testing()
